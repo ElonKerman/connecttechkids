@@ -1,0 +1,36 @@
+.sol-container {
+  border: 1.5px solid gray;
+  border-radius: 20px;
+  padding: 12px;
+  margin-top: 12px;
+  width: 200px;
+  height: auto;
+  color: red;
+  align-content: right;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 9px
+}
+.main {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+}
+
+.desc {
+  color: blue;
+}
+.weather-box {
+  width: 1000000px;
+  color: blue;
+}
+
+.me {
+  display: flex;
+}
+
+.em2{
+  background-size: 100%;
+  background-repeat:no-repeat;
+  background-position: center top;
+}

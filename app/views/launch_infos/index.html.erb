@@ -1,0 +1,98 @@
+<div class="background-container">
+  <div class="background-opaque-overlay">
+      <h1 class="text-center"><%= @title %></h1>
+      <div class="container">
+          <div class="row justify-content-md-center">
+              <div class="launches col-md-10">
+                  <% @launches.each_with_index do |launch, index| %>
+                    <div class="card" >
+                        <div class="card-body">
+                            <div class="wrapper-title-text">
+                                <h5 class="card-title">Time of Launch: </h5>
+                                <h6 class="card-text"><%= DateTime.parse(launch['net']).in_time_zone('Central Time (US & Canada)').strftime('%A, %b %d %Y %l:%M %p CT') %></h6>
+                            </div>
+                            <div class="wrapper-title-text">
+                                <h5 class="card-title">Launch Name:</h5>
+                                <h6 class="card-text"><%= launch['name'] %></h6>
+                            </div>
+                            <% if launch['rocket'].present? || launch['location'].present? || launch['missions'].present? %>
+                              <div class="toggle">
+                                  <!-- Checkbox toggle -->
+                                  <input type="checkbox" value="selected" id="more-info-<%= index %>" class="toggle-input">
+                                  <label for="more-info-<%= index %>" class="toggle-label">More Information: </label>
+
+                                  <!-- Content to toggle -->
+                                  <div role="toggle" class="toggle-content">
+                                      <br>
+                                      <% if launch['rocket'].present? && launch['rocket']['agencies'].present? %>
+                                        <div class="wrapper-title-text">
+                                            <h5 class="card-title">Company Name:</h5>
+                                            <h6 class="card-text"><%= launch['rocket']['agencies'][0]['name']%></h6>
+                                        </div>
+                                      <% end %>
+                                      <div class="wrapper-title-text">
+                                        <% if launch['location'].present? %>
+                                          <h5 class="card-title">Launchpad:</h5>
+
+                                          <h6 class="card-text"><%= launch['location']['pads'][0]['name'] %></h6>
+                                        <% end %>
+                                      </div>
+                                      <% if launch['missions'].present? && launch['missions'][0]['description'].present? %>
+                                        <div class="wrapper-title-text">
+                                            <h5 class="card-title">Mission Description:</h5>
+                                            <h6 class="card-text mission-description"><%= launch['missions'][0]['description'] %></h6>
+                                        </div>
+                                      <% end %>
+                                  </div>
+                              </div>
+                            <% end %>
+                                  <div class="col-md-10">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <div class="messages">
+                                                <% Message.where(launch: launch['name']).each do |om| %>
+                                                <div class="">
+                                                  <%= om.user.username %>:
+                                                  <%= om.text %>
+                                                  <% if current_user.present? && (current_user.admin == true || current_user.mod == true) %>
+                                                    <a href="/messages/<%= om.id %>/delete" data-confirm="are you sure">
+                                                        <i class="fas fa-eraser"></i>
+                                                    </a>
+                                                  <% end %>
+                                                </div>
+
+                                                <% end %>
+                                              </div>
+                                            <%  if current_user.present? %>
+                                              <form class="form-inline sendm-form" action="/sendn">
+                                                  <div class="form-group mb-2">
+                                                      <label for="inputtext" class="sr-only">message</label>
+                                                      <input type="text" class="form-control" id="inputtext" placeholder="message" name="message">
+                                                  </div>
+                                                  <input type="hidden" value="<%= launch['name'] %>" class="form-control" name="launch">
+                                                  <button type="submit" class="btn btn-primary mb-2">Send</button>
+                                              </form>
+                                            <% end %>
+                                          </div>
+                                      </div>
+                                  </div>
+                            <% if launch['vidURLs'].present? %>
+                              <h5 class="card-title">
+                                  <a href="<%= launch['vidURLs'][0] %>">Webcast</a>
+                              </h5>
+                            <% end %>
+                        </div>
+                    </div>
+                  <% end %>
+              </div>
+          </div>
+      </div>
+      <div class="content"></div>
+  </div>
+  <footer class="footer">
+    connectspacekids © 2020
+  </footer>
+  <div id="background-container">
+    <img src="/background_image.png" id="background-image" alt="graphic design of space and planets">
+  </div>
+</div>

@@ -1,0 +1,2 @@
+class LaunchInfo < ApplicationRecord
+end

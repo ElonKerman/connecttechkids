@@ -1,0 +1,107 @@
+.toggle {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+label.toggle-label {
+    cursor: pointer;
+    display: block;
+    width: 40%;
+    line-height: 19.2px;
+    font-size: 16px;
+    font-weight:bold;
+    color: #007bff;
+
+    &:after {
+        color: #007bff;
+        content: "+";
+        float: right;
+        font-weight: bold;
+    }
+}
+
+.toggle-content {
+    display: none;
+}
+
+.toggle-input {
+    display: none;
+
+    &:not(checked) ~ .toggle-content {
+        display: none;
+    }
+}
+
+.toggle-input:checked {
+    ~ .toggle-content {
+        display: block;
+    }
+
+    ~ .toggle-label {
+        &:after {
+            content: "-";
+        }
+    }
+}
+
+div.card {
+    margin-bottom: 15px;
+}
+
+.wrapper-title-text {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    width: 150px;
+}
+
+.card-text {
+    margin-left: 15px;
+}
+.mission-description {
+    margin-left: 55px;
+}
+
+.text-center {
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    label.toggle-label {
+        width: 45%;
+    }
+    .wrapper-title-text {
+        display: block;
+    }
+    .card-text {
+        margin-left: 0px;
+    }
+
+    .card-text:last-child {
+        margin-bottom: .75rem;
+    }
+
+    .mission-description {
+        margin-left: 0px;
+    }
+
+    .text-center {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    label.toggle-label {
+        width: 90%;
+    }
+
+    .text-center {
+        padding: .5rem;
+    }
+}

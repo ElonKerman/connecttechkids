@@ -1,0 +1,92 @@
+<div class="background-opaque-overlay">
+  <div class="content">
+    <h1 class="text-center">All Chat Channels</h1>
+    <div class="row justify-content-md-center">
+        <div class="col-md-2">
+              <% if current_user.admin == true || current_user.mod == true %>
+                <p><a href="/nc">New Channel</a></p>
+              <% end %>
+            <% @channels.each do |channel| %>
+              <% if current_user.admin == true || current_user.mod == true %>
+              <p><a href="/dc/<%=channel.id%>-<%=channel.name%>/delete"><i class="fas fa-dumpster-fire"></i></a></p>
+
+              <% end %>
+              <% if channel == @channel %>
+                <p><a href="/channels/<%=channel.id%>-<%=channel.name%>" class="btn btn-dark"><%= channel.name %></a></p>
+              <% else %>
+                <p><a href="/channels/<%=channel.id%>-<%=channel.name%>" class="btn btn-light"><%= channel.name %></a></p>
+              <% end %>
+            <% end %>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="messages">
+                    </div>
+                    <form class="form-inline sendm-form" action="/sendm" data-remote='true'>
+                        <div class="form-group mb-2">
+                            <label for="inputtext" class="sr-only">message</label>
+                            <input type="text" class="form-control" id="inputtext" placeholder="message" name="message">
+                        </div>
+                        <input type="hidden" value="<%= @channel.id %>" name="channel_id">
+                        <button type="submit" class="btn btn-primary mb-2">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+    connectspacekids © 2020
+</footer>
+<div id="background-container">
+  <img src="/background_image.png" id="background-image" alt="graphic design of space and planets">
+</div>
+<script>
+  setInterval(function(){
+    console.log("/channels/<%= @channel.id %>");
+    $.getJSON( "/channels/<%= @channel.id %>", function(data){
+      var messages = ""
+      var i;
+for (i = 0; i < data.length; i++) {
+if (<%= current_user.admin == true || current_user.mod == true %>){
+  var eraser = `<a href="/messages/${data[i].id}/delete" data-confirm="are you sure">
+      <i class="fas fa-eraser"></i>
+  </a>`
+  }
+  else{
+    var eraser = ``
+  }
+
+  if (<%= current_user.admin == true  %>){
+    var dumpster = `    <a href="/users/${data[i].user_id}/delete" rel="nofollow" data-confirm="are you sure">
+            <i class="fas fa-dumpster-fire"></i>
+        </a>`
+    }
+    else{
+      var dumpster = ``
+    }
+  if (<%= current_user.admin == true  %>){
+    var username = `<a href="/adedit/${data[i].user_id}">${data[i].user.username}<a/>`
+
+  }else{
+    var username=`${data[i].user.username}`
+  }
+
+  var message = `
+        <p>
+            ${dumpster}
+            <span class="message">${username}: ${data[i].text}</span>
+            ${eraser}
+
+        </p>
+        `;
+        messages = messages + message
+}
+
+      $(".messages").html(messages)
+      $(".sendm-form button").html("send")
+    })
+  }, 500)
+</script>

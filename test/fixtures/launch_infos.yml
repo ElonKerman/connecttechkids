@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  date_time: 2018-06-25 10:53:38
+  company: MyString
+  reflight: MyString
+  landing: MyString
+  destination: MyString
+  vehicle: MyString
+  payload: MyString
+  orbit: MyString
+  description: MyText
+
+two:
+  location: MyString
+  date_time: 2018-06-25 10:53:38
+  company: MyString
+  reflight: MyString
+  landing: MyString
+  destination: MyString
+  vehicle: MyString
+  payload: MyString
+  orbit: MyString
+  description: MyText

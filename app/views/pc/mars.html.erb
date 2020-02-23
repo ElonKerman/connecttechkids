@@ -1,0 +1,74 @@
+<body class="em2">
+  <div class="me">
+  </div>
+<button>click me</button>
+</body>
+<%-# Make no button, 1,2 background, only 5 boxes w/ info  -%>
+<script type="text/javascript">
+  var API_Key = "4j76Euj7HFRhyFdoW5YYnnZtMvSaSrIYY3X9Uhzi";
+$("button").click(function() {
+  $("button").hide()
+  var settings = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://api.nasa.gov/insight_weather/?api_key=" +
+      API_Key +
+      "&feedtype=json&ver=1.0",
+    method: "POST",
+    data: {}
+  };
+
+  $.ajax(settings).done(function(response) {
+    response.sol_keys.reverse();
+
+    response.sol_keys.forEach(sol => addElement(sol));
+    function addElement(sol) {
+      //console.log(response[sol])
+      var solEl = `
+     <div class="sol-container">
+    <h1>Martian Weather Service</h1>
+    <h2 class="SOL">Martian SOL: ${sol}</h2>
+    <h2 class="Date">Date: ${response[sol].First_UTC.split("T")[0]}</h2>
+
+    <h2 class="High Temp">Temp High: ${Math.round(
+      response[sol].AT.mx * 1.8 + 36
+    )}°F</h2>
+    <h2 class="Low Temp">Temp Low: ${Math.round(
+      response[sol].AT.mn * 1.8 + 36
+    )}°F</h2>
+
+    <h2 class="AVG wind">Averge Wind Speed: ${Math.round(
+      response[sol].HWS.av * 2.2369
+    )} mph</h2>
+    <h2 class="High wind">High Wind Speed: ${Math.round(
+      response[sol].HWS.mx * 2.2369
+    )} mph</h2>
+  </div>
+   `;
+      $(".me").append(solEl);
+    }
+  });
+});
+function background() {
+  var settings = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos/?api_key=4j76Euj7HFRhyFdoW5YYnnZtMvSaSrIYY3X9Uhzi",
+    method: "GET",
+    data: {}
+  };
+
+  $.ajax(settings).done(function(response) {
+    console.log(response);
+    $(".em2").css(
+      "background-image",
+      "url(" + response.latest_photos[2].img_src + ")"
+    );
+  });
+}
+background();
+//setInterval(background,1000000);
+
+</script>

@@ -1,0 +1,243 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.content {
+    min-height: calc(100vh - 130px);
+}
+
+#background-container {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+}
+
+#background-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 50%;
+    min-height: 50%;
+}
+
+.background-opaque-overlay {
+    background: linear-gradient(to bottom, rgba(255,255,225,0.1), rgba(225,225,255,0.1));
+    opacity: .9;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 80%;
+}
+
+.form-inline .form-group{
+    width:80%;
+}
+.form-inline .form-control{
+    width:100%;
+}
+
+
+footer{
+    text-align: center;
+    height: 50px;
+    color: white;
+    padding: 12px 0 15px 0;
+}
+
+.launches.col-md-10 {
+     /* overflow: scroll;  */
+    height: 100%;
+    margin-bottom: 40px;
+}
+
+.text-center {
+    color: white;
+}
+
+
+.main-content {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40%;
+    width: 100%;
+}
+
+.contact-us-text-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 10px;
+    max-width: 720px;
+}
+
+.contact-us-header {
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 1rem;
+}
+
+.about-us-header {
+    flex-align: center;
+}
+
+.contact-us-image {
+    height: 100%;
+    width:100%;
+    max-height: 100px;
+    max-width: 100px;
+    min-height: 50px;
+    min-width: 50px;
+    margin: 25px;
+    margin-top:40px;
+}
+
+.contact-us-text {
+    margin-bottom: 20px;
+}
+
+.message {
+    color: white;
+}
+
+
+.homepage-banner {
+    width: 100%;
+}
+
+.top.homepage-banner {
+    padding-bottom: 20px;
+}
+
+.bottom.homepage-banner {
+    padding-top: 20px;
+}
+
+.homepage-text-image-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.homepage.background-opaque-overlay {
+    background: white;
+    opacity: 1;
+}
+
+.homepage-text {
+    width: 90%;
+    margin: 20px;
+}
+
+.homepage-background-banner {
+    height: 300px;
+    overflow: hidden;
+}
+
+.homepage-footer {
+   color: black;
+}
+
+@media (min-width: 1000px) {
+    h3 {
+        font-size: 2rem;
+        padding-bottom: 1rem;
+    }
+    p {
+        font-size: 1.2rem;
+    }
+    .homepage-text-image-wrapper {
+        flex-wrap: nowrap;
+    }
+    .homepage-image {
+        width: 70%;
+        height: 70%;
+        margin: 20px;
+    }
+}
+
+@media (min-width: 1920px) {
+    h3 {
+        font-size: 3rem;
+        padding-bottom: 1.5rem;
+    }
+    p {
+        font-size: 2rem;
+    }
+
+    .chat-tos {
+        color: black
+    }
+
+    .logo {
+        width: 500px;
+    }
+
+    .homepage-content {
+       margin: 0 12em;
+    }
+
+    .homepage-text {
+        margin: 40px 20px;
+    }
+    .homepage-image {
+        margin: 40px 0 40px 20px;
+    }
+
+    h5.contact-us-text {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        width: 80%;
+        flex-direction: row;
+    }
+
+    .contact-us-text-container {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .homepage-image {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 425px) {
+    .homepage-text-image-wrapper {
+        flex-direction: column;
+    }
+
+    .homepage-text {
+        width: 90%;
+    }
+
+    .homepage-image {
+        width: 100%;
+        height: auto;
+    }
+}
