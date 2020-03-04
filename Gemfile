@@ -13,7 +13,7 @@ gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 gem 'devise'
 gem "draft_generators", :git => "https://github.com/firstdraft/draft_generators"
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
